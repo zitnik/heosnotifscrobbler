@@ -161,11 +161,11 @@ public class MyService extends NotificationListenerService {
 				Field viewIdField = action.getClass().getSuperclass().getDeclaredField("viewId");
 				viewIdField.setAccessible(true);
 				int viewId = viewIdField.getInt(action);
-				if (viewId == 2131362580) {
+				if (viewId == 2131362707) { // artist textView ID
 					if (text.isEmpty())
 						stopped();
 					artist = text;
-				} else if (viewId == 2131362582) {
+				} else if (viewId == 2131362709) { // title textView ID
 					if (title != null) { // song title twice -> looks like we're not getting the artist name
 						stopped();
 						return;
