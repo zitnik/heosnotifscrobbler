@@ -1,4 +1,4 @@
-package si.xlab.testnotifreceiver;
+package com.github.zitnik.heosnotifscrobbler;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
 		LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				textServiceStatus.setText(intent.getBooleanExtra(MyService.EXTRA_SERVICE_RUNNING, false) ? "OK" : "Not running!");
+				textServiceStatus.setText(intent.getBooleanExtra(NotifListenerService.EXTRA_SERVICE_RUNNING, false) ? "OK" : "Not running!");
 			}
-		}, new IntentFilter(MyService.ACTION_CHECK_SERVICE_RESPONSE));
+		}, new IntentFilter(NotifListenerService.ACTION_CHECK_SERVICE_RESPONSE));
 		
 		buttonEnabled.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 		final Database db = Database.getInstance(this);
 		scrobbleListAdapter.refresh();// TODO this is not exactly optimal...
 		
-		Intent intent = new Intent(MyService.ACTION_CHECK_SERVICE_QUERY);
+		Intent intent = new Intent(NotifListenerService.ACTION_CHECK_SERVICE_QUERY);
 		LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 		
 		textEnabled.setText(settings.getScrobbleEnabled() ? "Enabled" : "Disabled");

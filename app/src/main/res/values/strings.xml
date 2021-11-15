@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">TestNotifReceiver</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="app_name">HEOS Scrobbler (prototype)</string>
+    <string name="title_activity_main">HEOS Scrobbler</string>
 </resources>

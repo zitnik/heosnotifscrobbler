@@ -1,4 +1,4 @@
-package si.xlab.testnotifreceiver;
+package com.github.zitnik.heosnotifscrobbler;
 
 import android.content.Context;
 import android.content.SharedPreferences;

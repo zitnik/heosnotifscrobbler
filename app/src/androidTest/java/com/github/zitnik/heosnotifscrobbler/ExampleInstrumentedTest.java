@@ -1,4 +1,4 @@
-package si.xlab.testnotifreceiver;
+package com.github.zitnik.heosnotifscrobbler;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
 		// Context of the app under test.
 		Context appContext = InstrumentationRegistry.getTargetContext();
 
-		assertEquals("si.xlab.testnotifreceiver", appContext.getPackageName());
+		assertEquals("com.github.zitnik.heosnotifscrobbler", appContext.getPackageName());
 	}
 }

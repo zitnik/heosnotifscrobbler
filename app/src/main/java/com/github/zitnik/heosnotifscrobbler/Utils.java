@@ -1,4 +1,4 @@
-package si.xlab.testnotifreceiver;
+package com.github.zitnik.heosnotifscrobbler;
 
 public class Utils {
 	public static String capitalizeWords(String a){

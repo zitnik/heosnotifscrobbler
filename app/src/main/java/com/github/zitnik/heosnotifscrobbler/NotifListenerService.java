@@ -1,4 +1,4 @@
-package si.xlab.testnotifreceiver;
+package com.github.zitnik.heosnotifscrobbler;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,9 +14,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.security.auth.login.LoginException;
-
-public class MyService extends NotificationListenerService {
+public class NotifListenerService extends NotificationListenerService {
 	public static final String EXTRA_SERVICE_RUNNING = "SERVICE_RUNNING_EXTRA";
 	public static final String ACTION_CHECK_SERVICE_RESPONSE = "SERVICE_RUNNING_RESPONSE";
 	public static final String ACTION_CHECK_SERVICE_QUERY = "SERVICE_RUNNING_QUERY";
@@ -31,7 +29,7 @@ public class MyService extends NotificationListenerService {
 	
 	private boolean connected;
 	
-	public MyService() {
+	public NotifListenerService() {
 		connected = false;
 	}
 	
@@ -44,7 +42,7 @@ public class MyService extends NotificationListenerService {
 			public void onReceive(Context context, Intent intent) {
 				Intent responseIntent = new Intent(ACTION_CHECK_SERVICE_RESPONSE);
 				responseIntent.putExtra(EXTRA_SERVICE_RUNNING, connected);
-				LocalBroadcastManager.getInstance(MyService.this).sendBroadcast(responseIntent);
+				LocalBroadcastManager.getInstance(NotifListenerService.this).sendBroadcast(responseIntent);
 			}
 		}, new IntentFilter(ACTION_CHECK_SERVICE_QUERY));
 	}
