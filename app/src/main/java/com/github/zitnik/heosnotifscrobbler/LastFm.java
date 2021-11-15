@@ -18,9 +18,9 @@ import de.umass.lastfm.scrobble.ScrobbleResult;
 
 public class LastFm {
 //	Application name	HEOScrobbler
-	private static final String API_KEY = "d01110908f5f8a09b1cfe7d8ab104210";
-	private static final String API_SECRET = "c2422b18fb849ad8137577f8a804b65b";
-	
+	private static final String API_KEY = "your_api_key";
+	private static final String API_SECRET = "your_api_secret";
+
 	private static final String API_ROOT = "https://ws.audioscrobbler.com/2.0";
 	
 	private Session session;
@@ -41,8 +41,8 @@ public class LastFm {
 	private void login(){
 		Caller.getInstance().setApiRootUrl(API_ROOT);
 		
-		session = Authenticator.getMobileSession("grain_z",
-				"be93e3c393a837cc193564cdb0777f6b", // md5sum of pass
+		session = Authenticator.getMobileSession("your_username",
+				"md5_of_your_password", // md5sum of pass
 				API_KEY, API_SECRET);
 	}
 	
