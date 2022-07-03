@@ -7,7 +7,7 @@ devices).
 By ugly, I mean very hackish code. Well, we're getting song info by using reflection on the 
 notification object to dig up song artist & title info. This level of ugly.
 
-Currently works with HEOS (`com.dnm.heos.phone`) app version 2.1.660.
+Currently works with HEOS (`com.dnm.heos.phone`) app version 2.47.350.
 
 ## Usage
 Get your own API key for Last.fm (https://www.last.fm/api) and set `API_KEY` and `API_SECRET` 
