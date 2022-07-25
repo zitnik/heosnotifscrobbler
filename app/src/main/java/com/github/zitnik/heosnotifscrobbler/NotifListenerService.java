@@ -144,42 +144,37 @@ public class NotifListenerService extends NotificationListenerService {
 			Field actionsField = viewsClass.getDeclaredField("mActions");
 			actionsField.setAccessible(true);
 			ArrayList<Object> actions = (ArrayList<Object>) actionsField.get(views);
-			
-			for(int j = actions.size()-1; j>=0; j--) {
-				Object action = actions.get(j);
-				if (!action.getClass().getName().equals("android.widget.RemoteViews$ReflectionAction"))
-					continue;
-				Field mActionsField = action.getClass().getDeclaredField("methodName");
-				mActionsField.setAccessible(true);
-				if (!mActionsField.get(action).equals("setText"))
-					continue;
-				Field valueField = action.getClass().getDeclaredField("value");
-				valueField.setAccessible(true);
-				String text = (String) valueField.get(action);
-				Field viewIdField = action.getClass().getSuperclass().getDeclaredField("viewId");
-				viewIdField.setAccessible(true);
-				int viewId = viewIdField.getInt(action);
-				if (viewId == 2131362711) { // artist textView ID
-					if (text.isEmpty())
-						stopped();
-					artist = text;
-				} else if (viewId == 2131362713) { // title textView ID
-					if (title != null) { // song title twice -> looks like we're not getting the artist name
-						stopped();
-						return;
-					}
-					if (text.isEmpty())
-						stopped();
-					title = text;
-				}
-				if (artist != null && title != null)
-					break;
-			}
+
+			Object actionSetTitle = actions.get(1);
+			if(!checkSetTextAction(actionSetTitle))
+				return;
+			title = actionGetText(actionSetTitle);
+			Object actionSetArtist = actions.get(3);
+			if(!checkSetTextAction(actionSetArtist))
+				return;
+			artist = actionGetText(actionSetArtist);
+			if(title.isEmpty() || artist.isEmpty())
+				stopped();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		if(artist!=null && title!=null)
 			gotSong(artist, title);
+	}
+
+	private boolean checkSetTextAction(Object action) throws NoSuchFieldException, IllegalAccessException {
+		if (!action.getClass().getName().equals("android.widget.RemoteViews$ReflectionAction"))
+			return false;
+		Field mActionsField = action.getClass().getDeclaredField("methodName");
+		mActionsField.setAccessible(true);
+		return mActionsField.get(action).equals("setText");
+	}
+
+	private String actionGetText(Object action) throws IllegalAccessException, NoSuchFieldException {
+		Field valueField = action.getClass().getDeclaredField("value");
+		valueField.setAccessible(true);
+		return (String) valueField.get(action);
 	}
 }
